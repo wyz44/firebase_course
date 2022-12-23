@@ -123,34 +123,34 @@ def search_movies():
         return render_template("movies.html")
 
 
-# @app.route("/webhook", methods=["POST"])      #網頁介面尚未建立
-# def webhook():
-#     # build a request object
-#     req = request.get_json(force=True)
-#     # fetch queryResult from json
-#     action =  req.get("queryResult").get("action")             #可替換為 action =  req["queryResult"]["action"]
-#     # msg =  req.get("queryResult").get("queryText")             #可替換為 msg =  req["queryResult"]["queryText"]
-#     # info = "動作：" + action + "； 查詢內容：" + msg
+@app.route("/webhook", methods=["POST"])      #網頁介面尚未建立
+def webhook():
+    # build a request object
+    req = request.get_json(force=True)
+    # fetch queryResult from json
+    action =  req.get("queryResult").get("action")             #可替換為 action =  req["queryResult"]["action"]
+    # msg =  req.get("queryResult").get("queryText")             #可替換為 msg =  req["queryResult"]["queryText"]
+    # info = "動作：" + action + "； 查詢內容：" + msg
 
-#     if (action == "rateChoice"):
-#         rate =  req.get("queryResult").get("parameters").get("rate")
-#         if (rate == "輔12級"):
-#             rate = "輔導級(未滿十二歲之兒童不得觀賞)"
-#         elif (rate == "輔15級"):
-#             rate = "輔導級(未滿十五歲之人不得觀賞)"
-#         info = "您選擇的電影分級是：" + rate + "，相關電影：\n"
+    if (action == "rateChoice"):
+        rate =  req.get("queryResult").get("parameters").get("rate")
+        if (rate == "輔12級"):
+            rate = "輔導級(未滿十二歲之兒童不得觀賞)"
+        elif (rate == "輔15級"):
+            rate = "輔導級(未滿十五歲之人不得觀賞)"
+        info = "您選擇的電影分級是：" + rate + "，相關電影：\n"
 
-#         collection_ref = db.collection("movies_crawler")
-#         docs = collection_ref.get()
-#         result = ""
-#         for doc in docs:
-#             dict = doc.to_dict()
-#             if rate in dict["rate"]:
-#                 result += "片名：" + dict["title"] + "\n"
-#                 result += "介紹：" + dict["hyperlink"] + "\n\n"
-#         info += result
+        collection_ref = db.collection("movies_crawler")
+        docs = collection_ref.get()
+        result = ""
+        for doc in docs:
+            dict = doc.to_dict()
+            if rate in dict["rate"]:
+                result += "片名：" + dict["title"] + "\n"
+                result += "介紹：" + dict["hyperlink"] + "\n\n"
+        info += result
 
-#     return make_response(jsonify({"fulfillmentText": info}))
+    return make_response(jsonify({"fulfillmentText": info}))
 
 
 if __name__ == "__main__":

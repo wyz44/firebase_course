@@ -132,32 +132,34 @@ def webhook():
     # msg =  req.get("queryResult").get("queryText")             #可替換為 msg =  req["queryResult"]["queryText"]
     # info = "動作：" + action + "； 查詢內容：" + msg
 
-    # if (action == "rateChoice"):
-    #     rate =  req.get("queryResult").get("parameters").get("rate")
-    #     if (rate == "輔12級"):
-    #         rate = "輔導級(未滿十二歲之兒童不得觀賞)"
-    #     elif (rate == "輔15級"):
-    #         rate = "輔導級(未滿十五歲之人不得觀賞)"
-    #     info = "您選擇的電影分級是：" + rate + "，相關電影：\n"
+    if (action == "rateChoice"):
+        rate =  req.get("queryResult").get("parameters").get("rate")
+        if (rate == "輔12級"):
+            rate = "輔導級(未滿十二歲之兒童不得觀賞)"
+        elif (rate == "輔15級"):
+            rate = "輔導級(未滿十五歲之人不得觀賞)"
+        info = "您選擇的電影分級是：" + rate + "，相關電影：\n"
 
-    #     collection_ref = db.collection("movies_crawler")
-    #     docs = collection_ref.get()
-    #     result = ""
-    #     for doc in docs:
-    #         dict = doc.to_dict()
-    #         if rate in dict["rate"]:
-    #             result += "片名：" + dict["title"] + "\n"
-    #             result += "介紹：" + dict["hyperlink"] + "\n\n"
-    #     info += result
-    if (action == "CityWeather"):
+        collection_ref = db.collection("movies_crawler")
+        docs = collection_ref.get()
+        result = ""
+        for doc in docs:
+            dict = doc.to_dict()
+            if rate in dict["rate"]:
+                result += "片名：" + dict["title"] + "\n"
+                result += "介紹：" + dict["hyperlink"] + "\n\n"
+        info += result
+    elif (action == "CityWeather"):
         city =  req.get("queryResult").get("parameters").get("city")
         token = "rdec-key-123-45678-011121314"
         url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=" + token + "&format=JSON&locationName=" + str(city)
         Data = requests.get(url)
+        info +="hi"
         Weather = json.loads(Data.text)["records"]["location"][0]["weatherElement"][0]["time"][0]["parameter"]["parameterName"]
         Rain = json.loads(Data.text)["records"]["location"][0]["weatherElement"][1]["time"][0]["parameter"]["parameterName"]
         MinT = json.loads(Data.text)["records"]["location"][0]["weatherElement"][2]["time"][0]["parameter"]["parameterName"]
         MaxT = json.loads(Data.text)["records"]["location"][0]["weatherElement"][4]["time"][0]["parameter"]["parameterName"]
+        info +="hi"
         info = city + "的天氣是" + Weather + "，降雨機率：" + Rain + "%"
         info += "，溫度：" + MinT + "-" + MaxT + "度"
 

@@ -149,7 +149,7 @@ def webhook():
                 result += "片名：" + dict["title"] + "\n"
                 result += "介紹：" + dict["hyperlink"] + "\n\n"
         info += result
-    elif (action == "CityWeather"):
+    elif (action == "cityWeather"):
         info +="hi"
         city =  req.get("queryResult").get("parameters").get("city")
         token = "rdec-key-123-45678-011121314"

@@ -132,7 +132,7 @@ def webhook():
     # msg =  req.get("queryResult").get("queryText")             #可替換為 msg =  req["queryResult"]["queryText"]
     # info = "動作：" + action + "； 查詢內容：" + msg
 
-    if (action == "CityWeather"):
+    if (action == "cw"):
         city =  req.get("queryResult").get("parameters").get("city")
         token = "rdec-key-123-45678-011121314"
         url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=" + token + "&format=JSON&locationName=" + str(city)

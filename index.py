@@ -163,7 +163,6 @@ def webhook():
         info +="hi"
         info = city + "的天氣是" + Weather + "，降雨機率：" + Rain + "%"
         info += "，溫度：" + MinT + "-" + MaxT + "度"
-
     return make_response(jsonify({"fulfillmentText": info}))
 
 

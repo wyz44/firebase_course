@@ -149,7 +149,6 @@ def webhook():
                 result += "片名：" + dict["title"] + "\n"
                 result += "介紹：" + dict["hyperlink"] + "\n\n"
         info += result
-        return make_response(jsonify({"fulfillmentText": info}))
     elif (action == "CityWeather"):
         city =  req.get("queryResult").get("parameters").get("city")
         token = "rdec-key-123-45678-011121314"
@@ -162,7 +161,7 @@ def webhook():
         info = city + "的天氣是" + Weather + "，降雨機率：" + Rain + "%"
         info += "，溫度：" + MinT + "-" + MaxT + "度"
 
-        return make_response(jsonify({"fulfillmentText": info}))
+    return make_response(jsonify({"fulfillmentText": info}))
 
 
 # if __name__ == "__main__":

@@ -131,7 +131,7 @@ def webhook():
     action =  req.get("queryResult").get("action")             #可替換為 action =  req["queryResult"]["action"]
     # msg =  req.get("queryResult").get("queryText")             #可替換為 msg =  req["queryResult"]["queryText"]
     # info = "動作：" + action + "； 查詢內容：" + msg
-
+    info = ""
     if (action == "rateChoice"):
         rate =  req.get("queryResult").get("parameters").get("rate")
         if (rate == "輔12級"):

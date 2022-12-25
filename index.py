@@ -158,7 +158,8 @@ def webhook():
             for doc in docs:
                 dict = doc.to_dict()
                 result += dict["name"] + "\n"
-                result += dict["address"] + "\n\n"
+                result += dict["address"] + "\n"
+                result += dict["link"] + "\n\n"
             info += result
 
     return make_response(jsonify({"fulfillmentText": info}))

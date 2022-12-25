@@ -150,14 +150,16 @@ def webhook():
                 result += "介紹：" + dict["hyperlink"] + "\n\n"
         info += result
     elif (action == "Theater"):
-        collection_ref = db.collection("TaichungTheater")
-        docs = collection_ref.get()
-        result = ""
-        for doc in docs:
-            dict = doc.to_dict()
-            result += dict["name"] + "\n"
-            result += dict["address"] + "\n\n"
-        info += result
+        location =  req.get("queryResult").get("parameters").get("theater")
+        if (location == "臺中市"):
+            collection_ref = db.collection("TaichungTheater")
+            docs = collection_ref.get()
+            result = ""
+            for doc in docs:
+                dict = doc.to_dict()
+                result += dict["name"] + "\n"
+                result += dict["address"] + "\n\n"
+            info += result
 
     return make_response(jsonify({"fulfillmentText": info}))
 
